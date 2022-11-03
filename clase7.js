@@ -107,31 +107,66 @@ function mostrarDatosEnPerfil() {
     `; 
 }
 mostrarDatosEnPerfil();
+/* -------------------------------------------------------------------------- */
+/*                        [4] FUNCION: marcar favorito                        */
+/* -------------------------------------------------------------------------- */
+// - buscar el album por id en el array
+// - cambiar el estado del like
+// - volver a renderizar
+function marcarFavorito() {
+  const botonesLike = document.querySelectorAll(".fa-heart");
 
-//////// Click en Like ////
+  botonesLike.forEach((boton) => {
+    boton.addEventListener("click", function () {
+      console.log(boton.id);
 
-const corazones =  document.querySelectorAll("i");
+      albumesFamosos.forEach((album) => {
+        if (album.id == boton.id) {
+          album.like = !album.like;
+        }
+      });
+      renderizarAlbumes(albumesFamosos);
+      mostrarDatosEnPerfil();
+      marcarFavorito();
+    });
+  });
+}
+marcarFavorito();
 
-corazones.forEach((corazon) =>{
-  corazon.addEventListener("click", function(e){
-    let idAlbum = corazon.id;
-    if(corazon.classList.contains("favorito")){
-      corazon.classList.remove('favorito');
-      alert("Album eliminado de tu lista de favoritos");
-      console.log(albumesFamosos.filter(album => albumesFamosos.id == idAlbum));
+/* ----------------------------- MESA DE TRABAJO ---------------------------- */
+/* -------------------------------------------------------------------------- */
+/*                         [5] FUNCION: Eliminar album                        */
+/* -------------------------------------------------------------------------- */
+// Debemos desarrollar la funcion de eliminar un album. Para esto le vamos a
+// preguntar al usuario cual quiere eliminar.
+// Vamos a seguir las indicaciones que nos permiten lograrlo utilizando eventos.
+// 1- Hay que escuchar el evento de 'keydown' para detectar cuando el usuario
+// presiona la tecla f
+// 2- Una vez que detectamos la tecla, debemos mostrarle un prompt al usuario
+// para que ingrese el nombre del album que desea eliminar
+// 3- Podemos buscar la posicion del album buscado en el array con la funcion .findIndex()
+// 4- Si la busqueda nos da un resultado válido, procedemos a borrar el objeto del array
+// 5- Acto seguido debemos llamar a las funciones de renderizar y marcar favorito para que sean nuevamente aplicadas.
 
-  }else{
-    corazon.classList.add('favorito');
-    alert("Album agregado a tu lista de favoritos");
-    console.log(albumesFamosos.filter(album => albumesFamosos.id == idAlbum));
-  };
+let albumFamososOk = [];
 
-  // console.log(corazon.parentNode);
+function eliminarAlbum() {
+  // desarrollar la función 👇
+
+document.addEventListener("keypress", function(event) {
+  
+  if (event.key == "f" || event.key == "F" ) {
+    let nombreAlbumAEliminar = prompt (`¿Qué album desea eliminar?`);
+    albumFamososOk =  albumesFamosos.filter((album) => album.nombre != nombreAlbumAEliminar);
+    eliminarAlbum() 
+    renderizarAlbumes(albumFamososOk);
+    mostrarDatosEnPerfil();
+    marcarFavorito();
+    }
+   
+  });
+
+}
 
 
- 
-  } )
-})
-
-
-
+eliminarAlbum();

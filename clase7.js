@@ -105,64 +105,33 @@ function mostrarDatosEnPerfil() {
       <span id="cant-favoritos">${contadorFavoritos} ${contadorFavoritos > 1 ? "álbumes" :"álbum" } favoritos</span>
     </p>
     `; 
-  // desarrollar la función 👇
 }
 mostrarDatosEnPerfil();
 
 //////// Click en Like ////
 
 const corazones =  document.querySelectorAll("i");
+
 corazones.forEach((corazon) =>{
   corazon.addEventListener("click", function(e){
-    // console.log(corazon.classList);
-    // console.log(albumesFamosos.like);
-    
+    let idAlbum = corazon.id;
     if(corazon.classList.contains("favorito")){
       corazon.classList.remove('favorito');
       alert("Album eliminado de tu lista de favoritos");
-      // console.log(e);
-      console.log(corazon.parentNode.like);
+      console.log(albumesFamosos.filter(album => albumesFamosos.id == idAlbum));
+
   }else{
     corazon.classList.add('favorito');
     alert("Album agregado a tu lista de favoritos");
-    console.log(corazon.parentNode.like);
-
+    console.log(albumesFamosos.filter(album => albumesFamosos.id == idAlbum));
   };
-  console.log(corazon.parentNode);
-  console.log(corazon.id);
 
-if(albumesFamosos.id == corazon.parentNode)
-  }
-  // let idCorazon = corazon.id;
-  // let nodoPadre = corazon.parentNode.like;
-
-  //  console.log(albumesFamosos.filter(id=corazon.id));
+  // console.log(corazon.parentNode);
 
 
+ 
   } )
 })
 
-
-
-
-// corazon.addEventListener('click', function(e){
-
-//   console.log(this.id)
-//     if(corazon.classList.contains(".favorito")){
-//         this.classList.remove('.favorito');
-//     }else{
-//         this.classList.add('.favorito');
-//     };
-
-// });
-
-// corazon.onclick = function () {
-//   if(this.classList.contains("favorito")){
-//     this.classList.remove('favorito');
-// }else{
-//     this.classList.add('favorito');
-// };
-
-// }
 
 
